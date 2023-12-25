@@ -50,6 +50,10 @@ body {
   cursor: pointer;
 }
 
+.active {
+  background: #e3e7fd;
+}
+
 .box {
   display: flex;
   background-color: white;

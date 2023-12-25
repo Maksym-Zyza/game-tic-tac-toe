@@ -22,6 +22,14 @@ let step = 0;
 content.insertAdjacentHTML("afterbegin", createMarkup());
 content.addEventListener("click", handlerClick);
 
+function createMarkup() {
+  let markup = "";
+  for (let i = 1; i < 10; i += 1) {
+    markup += `<div class="item js-item" data-id="${i}"></div>`;
+  }
+  return markup;
+}
+
 function handlerClick({ target }) {
   if (!target.classList.contains("js-item") || target.textContent) {
     return;
@@ -42,16 +50,24 @@ function handlerClick({ target }) {
   count > 0 && showMessage(step !== 9);
   count > 1 && showWinner();
   step === 9 && count === 1 && showWinner();
-  step === 9 && count === 0 && modalShow("Game is over!");
+  step === 9 && count === 0 && modalShow("Game over!");
 }
 
 function checkWinner(history, player) {
-  const result = combination.some((item) =>
+  const winComb = combination.find((item) =>
     item.every((id) => history.includes(id))
   );
+  const result = !!winComb;
   winner[player] = result;
   count += Object.values(winner).filter((el) => el).length;
-  result && updateScore(player);
+  result && (updateScore(player), showWinComb(winComb));
+}
+
+function showWinComb(winnerArr) {
+  const items = document.querySelectorAll(".item");
+  items.forEach((el) => {
+    winnerArr.includes(Number(el.dataset.id)) && el.classList.add("active");
+  });
 }
 
 function updateScore(player) {
@@ -61,7 +77,7 @@ function updateScore(player) {
 
 function showMessage(bool) {
   if (count === 1 && bool) {
-    const points = `Player ${winner.X ? "X" : "O"} has scored 1 point.`;
+    const points = `Player ${winner.X ? "X" : "O"} scored 1 point.`;
     const message = `Player ${!winner.X ? "X" : "O"} has one more try.`;
 
     const markup = `<div class="message">
@@ -73,14 +89,6 @@ function showMessage(bool) {
     const existingMessage = document.querySelector(".message");
     if (existingMessage) existingMessage.remove();
   }
-}
-
-function createMarkup() {
-  let markup = "";
-  for (let i = 1; i < 10; i += 1) {
-    markup += `<div class="item js-item" data-id="${i}"></div>`;
-  }
-  return markup;
 }
 
 function showWinner() {
