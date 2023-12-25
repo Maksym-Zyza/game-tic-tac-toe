@@ -10,9 +10,11 @@ const combination = [
 ];
 
 const content = document.querySelector(".js-content");
+const playersScore = document.querySelectorAll(".js-score");
 const historyX = [];
 const historyO = [];
 const winner = { X: false, O: false };
+const score = { X: 0, O: 0 };
 let player = "X";
 let count = 0;
 let step = 0;
@@ -49,17 +51,21 @@ function checkWinner(history, player) {
   );
   winner[player] = result;
   count += Object.values(winner).filter((el) => el).length;
+  result && updateScore(player);
+}
+
+function updateScore(player) {
+  score[player] += 1;
+  playersScore[player === "X" ? 0 : 1].innerHTML = score[player];
 }
 
 function showMessage(bool) {
   if (count === 1 && bool) {
-    const score = `Score (X : O) : ${winner.X ? 1 : 0} - ${winner.O ? 1 : 0}`;
-    const message = `Player "${
-      Object.entries(winner).find((el) => !el[1])[0]
-    }" has one more try.`;
+    const points = `Player ${winner.X ? "X" : "O"} has scored 1 point.`;
+    const message = `Player ${!winner.X ? "X" : "O"} has one more try.`;
 
     const markup = `<div class="message">
-    <div><b>${score}</b></div>
+    <div><b>${points}</b></div>
     <div>${message}</div>
     </div>`;
     content.insertAdjacentHTML("afterend", markup);
