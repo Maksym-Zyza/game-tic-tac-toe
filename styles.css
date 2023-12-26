@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 16px;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +13,20 @@ body {
   line-height: 1.5;
 }
 
+.background {
+  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bgImg {
+  background-size: cover;
+  background-image: linear-gradient(rgba(38, 38, 43, 1), rgba(34, 34, 40, 0.1)),
+    url(./img/bg1.jpeg);
+}
+
 .title {
+  margin-top: 8%;
   text-align: center;
 }
 
@@ -22,8 +35,9 @@ body {
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: 0 5%;
-  font-size: 20px;
+  margin-bottom: 4%;
+  padding: 0 8%;
+  font-size: 24px;
   font-weight: 500;
 }
 
@@ -31,14 +45,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 40px;
 }
 .content {
   display: grid;
   grid-template-columns: repeat(3, 75px);
   grid-template-rows: repeat(3, 75px);
-  width: 225px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .item {
@@ -46,7 +58,9 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 40px;
+  /* background-color: #fafafa; */
   border: 1px solid #738bf8;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -65,6 +79,9 @@ body {
   padding: 30px;
 }
 .message > div {
+  margin-bottom: 16px;
+  padding: 8px;
   text-align: center;
-  padding: 10px;
+  background-color: #fafafa;
+  border-radius: 8px;
 }
