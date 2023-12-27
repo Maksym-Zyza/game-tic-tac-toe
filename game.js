@@ -11,10 +11,13 @@ const combination = [
 
 const content = document.querySelector(".js-content");
 const playersScore = document.querySelectorAll(".js-score");
+const heroX = document.querySelector(".hero-x");
+const heroO = document.querySelector(".hero-o");
 const historyX = [];
 const historyO = [];
 const winner = { X: false, O: false };
 const score = { X: 0, O: 0 };
+let imgNumber = 2;
 let player = "X";
 let count = 0;
 let step = 0;
@@ -75,6 +78,13 @@ function updateScore(player) {
   playersScore[player === "X" ? 0 : 1].innerHTML = score[player];
 }
 
+function updateHero() {
+  heroX.style.backgroundImage = `url(./img/heroX${imgNumber}.png)`;
+  heroO.style.backgroundImage = `url(./img/heroO${imgNumber}.png)`;
+  imgNumber++;
+  if (imgNumber > 5) imgNumber = 1;
+}
+
 function showMessage(bool) {
   if (count === 1 && bool) {
     const points = `Player ${winner.X ? "X" : "O"} scored 1 point.`;
@@ -111,6 +121,7 @@ function modalShow(message) {
       onClose() {
         document.removeEventListener("keydown", this.handler);
         resetGame();
+        updateHero();
       },
     }
   );
