@@ -26,7 +26,7 @@ body {
 }
 
 .title {
-  margin-top: 8%;
+  margin-top: 6%;
   text-align: center;
 }
 
@@ -39,6 +39,34 @@ body {
   padding: 0 8%;
   font-size: 24px;
   font-weight: 500;
+}
+
+.players > div {
+  width: 200px;
+}
+
+.wrapper-hero {
+  position: absolute;
+  margin-top: 40px;
+  width: 220px;
+  height: 220px;
+  background-size: cover;
+}
+
+@media screen and (max-width: 760px) {
+  .wrapper-hero {
+    position: static;
+  }
+}
+@media screen and (max-width: 530px) {
+  .players {
+    padding: 0;
+  }
+  .wrapper-hero {
+    margin: 0;
+    width: 180px;
+    height: 180px;
+  }
 }
 
 .container {
@@ -77,6 +105,7 @@ body {
 .message {
   margin-top: 20px;
   padding: 30px;
+  animation: showing 0.8s forwards;
 }
 .message > div {
   margin-bottom: 16px;
@@ -84,4 +113,52 @@ body {
   text-align: center;
   background-color: #fafafa;
   border-radius: 8px;
+}
+
+/* ====== Animations ======= */
+
+.hero-x {
+  background-image: url(./img/nin8.png);
+  animation: slideInX 1s forwards;
+  transition: opacity 3s ease, transform 1s ease;
+}
+.hero-0 {
+  background-image: url(./img/nin2.png);
+  animation: slideInY 1s forwards;
+  transition: opacity 3s ease, transform 1s ease;
+}
+
+@keyframes slideInX {
+  from {
+    left: -220px;
+    opacity: 0;
+    transform: scale(0) rotate(-360deg);
+  }
+  to {
+    left: 80px;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes slideInY {
+  from {
+    right: -220px;
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+  }
+  to {
+    right: 60px;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes showing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
