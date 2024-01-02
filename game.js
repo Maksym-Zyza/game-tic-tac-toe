@@ -30,6 +30,7 @@ function createMarkup() {
   for (let i = 1; i < 10; i += 1) {
     markup += `<div class="item js-item" data-id="${i}"></div>`;
   }
+  removeRotateClass();
   return markup;
 }
 
@@ -76,11 +77,13 @@ function showWinComb(winnerArr) {
 function updateScore(player) {
   score[player] += 1;
   playersScore[player === "X" ? 0 : 1].innerHTML = score[player];
+  updateHero();
 }
 
 function updateHero() {
-  heroX.style.backgroundImage = `url(./img/heroX${imgNumber}.png)`;
-  heroO.style.backgroundImage = `url(./img/heroO${imgNumber}.png)`;
+  const hero = player === "X" ? heroX : heroO;
+  hero.style.backgroundImage = `url(./img/hero${player}${imgNumber}.png)`;
+  hero.classList.add("rotate");
   imgNumber++;
   if (imgNumber > 5) imgNumber = 1;
 }
@@ -121,7 +124,6 @@ function modalShow(message) {
       onClose() {
         document.removeEventListener("keydown", this.handler);
         resetGame();
-        updateHero();
       },
     }
   );
@@ -142,4 +144,11 @@ function resetGame() {
 
 function onEscape({ code }) {
   code === "Escape" && this.close();
+}
+
+function removeRotateClass() {
+  setTimeout(function () {
+    heroX.classList.remove("rotate");
+    heroO.classList.remove("rotate");
+  }, 1000);
 }

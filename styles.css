@@ -45,28 +45,16 @@ body {
   width: 200px;
 }
 
+.score {
+  font-size: 28px;
+}
+
 .wrapper-hero {
   position: absolute;
   margin-top: 40px;
   width: 220px;
   height: 220px;
   background-size: cover;
-}
-
-@media screen and (max-width: 800px) {
-  .wrapper-hero {
-    position: static;
-  }
-}
-@media screen and (max-width: 530px) {
-  .players {
-    padding: 0;
-  }
-  .wrapper-hero {
-    margin: 0;
-    width: 180px;
-    height: 180px;
-  }
 }
 
 .container {
@@ -86,7 +74,6 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  /* background-color: #fafafa; */
   border: 1px solid #738bf8;
   border-radius: 8px;
   cursor: pointer;
@@ -115,45 +102,72 @@ body {
   border-radius: 8px;
 }
 
-/* ====== Animations ======= */
+/* ====== @media ======= */
+@media screen and (max-width: 800px) {
+  .wrapper-hero {
+    position: static;
+  }
+}
+@media screen and (max-width: 530px) {
+  .title {
+    margin: 2%;
+  }
+  .players {
+    margin: 0;
+    padding: 0;
+  }
+  .wrapper-hero {
+    margin: 0;
+    width: 160px;
+    height: 160px;
+  }
+  .message {
+    margin: 0;
+  }
+}
 
+/* ====== Modal ======= */
+.basicLightbox {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* ====== Animations ======= */
 .hero-x {
   background-image: url(./img/heroX1.png);
-  animation: slideInX 1s forwards;
-  transition: opacity 3s ease, transform 1s ease;
 }
 .hero-o {
   background-image: url(./img/heroO1.png);
-  animation: slideInY 1s forwards;
-  transition: opacity 3s ease, transform 1s ease;
 }
 
-@keyframes slideInX {
+.rotate {
+  animation: rotate 0.8s forwards;
+  transition: opacity 1s ease, transform 1s ease;
+}
+.shake {
+  animation: shakeUp 5s infinite;
+}
+
+@keyframes rotate {
   from {
-    left: -220px;
     opacity: 0;
-    transform: scale(0) rotate(-360deg);
+    transform: scale(0) rotate(-720deg);
   }
   to {
-    left: 100px;
     opacity: 1;
     transform: scale(1) rotate(0deg);
   }
 }
-
-@keyframes slideInY {
-  from {
-    right: -220px;
-    opacity: 0;
-    transform: scale(0) rotate(360deg);
+@keyframes shake {
+  0% {
+    transform: translateY(10px);
   }
-  to {
-    right: 80px;
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
   }
 }
-
 @keyframes showing {
   from {
     opacity: 0;
@@ -162,3 +176,19 @@ body {
     opacity: 1;
   }
 }
+/* @keyframes exitX {
+  from {
+    left: -220px;
+  }
+  to {
+    left: 110px;
+  }
+}
+@keyframes exitO {
+  from {
+    right: -220px;
+  }
+  to {
+    right: 110px;
+  }
+} */
